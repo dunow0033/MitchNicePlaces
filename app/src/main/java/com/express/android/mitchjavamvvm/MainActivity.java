@@ -46,6 +46,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mMainActivityViewModel.getIsUpdating().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean){
+                    showProgressBar();
+                }
+                else {
+                    hideProgressBar();
+                    mRecyclerView.smoothScrollToPosition(mMainActivityViewModel.getNicePlaces().getValue().size() - 1);
+                }
+            }
+        });
+
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMainActivityViewModel.addNewValue(
+                        new NicePlace(
+                                "https://i.imgur.com/ZcLLrkY.jpg",
+                                "Washington"
+                        )
+                );
+            }
+        });
+
         initRecyclerView();
     }
 
