@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         mMainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
+        mMainActivityViewModel.init();
+
         mMainActivityViewModel.getNicePlaces().observe(this, new Observer<List<NicePlace>>() {
             @Override
             public void onChanged(List<NicePlace> nicePlaces) {
